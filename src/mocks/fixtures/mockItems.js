@@ -23,7 +23,8 @@ export const mockItems = [
         "category": "도서",
         "nickname": "닉네임 0",
         "wishCount": 4,
-        "completionTime": "2025/03/13"
+        "completionTime": "2025/03/13",
+        "isOwner" : true
     },
     {
         "id" : 1,

@@ -23,6 +23,21 @@ function ItemDetail() {
         }
     }
 
+    const handleItemApply = () => {
+        axios.post("/api/history", {itemId: itemId}).then(r => {
+                alert("신청되었습니다.");
+                navigate("/items");
+            }
+        )
+
+    }
+
+    const handleAddWish = () => {
+        axios.post("/api/wish", {itemId: itemId}).then(r => {
+            alert("위시 리시트에 등록되었습니다.");
+        })
+    }
+
     useEffect(() => {
         axios.get(`/api/item/${itemId}`).then(res => {
             setItem(res.data);
@@ -56,11 +71,18 @@ function ItemDetail() {
                                 <p className="mb-5">{item.description}</p>
 
                                 <p className="h6 opacity-75"><small>관심 {item.wishCount} · 조회 {item.viewCount}</small></p>
-                                <div className="d-grid gap-2">
-                                    <Button variant="outline-primary"
-                                            onClick={() => navigate(`/updateItem/${item.id}`)}>수정하기</Button>
-                                    <Button variant="outline-danger" onClick={handleItemDelete}>삭제하기</Button>
-                                </div>
+                                {item.isOwner
+                                    ?
+                                    <div className="d-grid gap-2">
+                                        <Button variant="outline-primary"
+                                                onClick={() => navigate(`/updateItem/${item.id}`)}>수정하기</Button>
+                                        <Button variant="outline-danger" onClick={handleItemDelete}>삭제하기</Button>
+                                    </div>
+                                    : <div className="d-grid gap-2">
+                                        <Button variant="outline-primary" onClick={handleItemApply}>나눔 받기 신청</Button>
+                                        <Button variant="outline-secondary" onClick={handleAddWish}>위시 등록하기</Button>
+                                    </div>
+                                }
                             </Col>
                         </Row>
 

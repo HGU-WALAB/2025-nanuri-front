@@ -42,5 +42,9 @@ export const mockCategory = [
     {
         value: 10,
         label: '티켓/교환권',
+    },
+    {
+        value: 11,
+        label: '기타/등등'
     }
 ]
